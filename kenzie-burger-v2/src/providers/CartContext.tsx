@@ -36,11 +36,6 @@ export interface ICartContext {
   setRemoveAll: React.Dispatch<React.SetStateAction<IRemoveAll[]>>;
   removeProductsAllCart: () => void;
   total: number;
-  // filterProductList: ICart[];
-  // filter: "" | ICart;
-  // setfilter: React.Dispatch<React.SetStateAction<"" | ICart>>;
-  // setSearchInput: React.Dispatch<React.SetStateAction<"" | ICart>>;
-  // searchInput: "" | ICart;
 }
 
 export const CartContext = createContext({} as ICartContext);
@@ -49,8 +44,6 @@ export const CartProvider = ({ children }: ICartProviderProps) => {
   const [productList, setProductList] = useState<ICart[]>([]);
   const [favoriteList, setFavoriteList] = useState<IproductCartList[]>([]);
   const [removerAll, setRemoveAll] = useState<IRemoveAll[]>([]);
-  // const [filter, setfilter] = useState<ICart | "">("");
-  // const [searchInput, setSearchInput] = useState<ICart | "">("");
 
   useEffect(() => {
     const token = localStorage.getItem("@TOKEN");
@@ -91,12 +84,6 @@ export const CartProvider = ({ children }: ICartProviderProps) => {
     setFavoriteList([]);
   };
 
-  // const filterProductList = productList.filter(
-  //   (product) =>
-  //     product.name.toLowerCase().includes(filter.toLowerCase()) ||
-  //     product.category.toLowerCase().includes(filter.toLowerCase())
-  // );
-
   const total = favoriteList.reduce((previusValue, currentValue) => {
     return previusValue + currentValue.price;
   }, 0);
@@ -111,12 +98,7 @@ export const CartProvider = ({ children }: ICartProviderProps) => {
         setFavoriteList,
         setRemoveAll,
         removeProductsAllCart,
-        // filterProductList,
-        // setfilter,
-        // filter,
         total,
-        // searchInput,
-        // setSearchInput,
       }}
     >
       {children}

@@ -3,7 +3,7 @@ import SearchForm from "./SearchForm";
 import { StyledHeader } from "./style";
 import LogoKenzieBurguer from "../../assets/LogoKenzieBurguer.svg";
 import { StyledContainer } from "../../styles/grid";
-import { useContext } from "react";
+import { SetStateAction, useContext } from "react";
 import { UserContext } from "../../providers/UserContext";
 
 const Header = () => {
@@ -19,7 +19,11 @@ const Header = () => {
             className="logo"
           />
           <nav className="nav" role="navigation">
-            <SearchForm />
+            <SearchForm
+              setSearch={function (value: SetStateAction<string>): void {
+                throw new Error("Function not implemented.");
+              }}
+            />
             <div className="buttons">
               <button type="button" onClick={() => setIsOpenModal(true)}>
                 <MdShoppingCart size={28} />

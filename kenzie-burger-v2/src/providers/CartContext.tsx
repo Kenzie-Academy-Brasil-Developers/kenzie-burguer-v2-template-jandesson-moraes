@@ -36,6 +36,9 @@ export interface ICartContext {
   setRemoveAll: React.Dispatch<React.SetStateAction<IRemoveAll[]>>;
   removeProductsAllCart: () => void;
   total: number;
+  searchResults: ICart[];
+  search: string;
+  setSearch: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export const CartContext = createContext({} as ICartContext);
@@ -44,6 +47,7 @@ export const CartProvider = ({ children }: ICartProviderProps) => {
   const [productList, setProductList] = useState<ICart[]>([]);
   const [favoriteList, setFavoriteList] = useState<IproductCartList[]>([]);
   const [removerAll, setRemoveAll] = useState<IRemoveAll[]>([]);
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     const token = localStorage.getItem("@TOKEN");
@@ -88,6 +92,12 @@ export const CartProvider = ({ children }: ICartProviderProps) => {
     return previusValue + currentValue.price;
   }, 0);
 
+  const searchResults = productList.filter(
+    (product) =>
+      product.name.toLowerCase().includes(search.toLowerCase()) ||
+      product.category.toLowerCase().includes(search.toLowerCase())
+  );
+
   return (
     <CartContext.Provider
       value={{
@@ -99,6 +109,9 @@ export const CartProvider = ({ children }: ICartProviderProps) => {
         setRemoveAll,
         removeProductsAllCart,
         total,
+        searchResults,
+        search,
+        setSearch,
       }}
     >
       {children}

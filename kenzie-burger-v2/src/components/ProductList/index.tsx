@@ -4,11 +4,13 @@ import { StyledProductList } from "./style";
 import { CartContext } from "../../providers/CartContext";
 
 const ProductList = () => {
-  const { productList } = useContext(CartContext);
+  const { productList, searchResults, search } = useContext(CartContext);
+
+  const currentProductList = search !== "" ? searchResults : productList;
 
   return (
     <StyledProductList>
-      {productList.map((product) => (
+      {currentProductList.map((product) => (
         <ProductCard
           key={product.id}
           name={product.name}

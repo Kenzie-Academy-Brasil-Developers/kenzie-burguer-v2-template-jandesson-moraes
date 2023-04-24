@@ -1,15 +1,33 @@
 import styled from "styled-components";
 
 export const StyledNotFound = styled.div`
-  div {
+  @media (min-width: 320px) {
     display: flex;
-    flex-direction: column;
+    margin-top: 5rem;
+    div {
+      display: flex;
+      img {
+        width: 100vw;
+        max-height: 100vh;
+        height: 100%;
+      }
+    }
+  }
+
+  @media (min-width: 768px) {
+    display: flex;
+    margin-top: 0;
     align-items: center;
     justify-content: center;
-    width: 100vw;
+    max-height: 100vh;
+    max-width: 100vw;
 
-    img {
-      height: 100vh;
+    div {
+      img {
+        width: 700px;
+        /* max-height: 100vh; */
+        max-height: 650px;
+      }
     }
   }
 `;
